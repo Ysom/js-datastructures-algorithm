@@ -1,4 +1,10 @@
-/* 数据结构 -- 栈(stack) */
+/**
+ * 数据结构 栈(stack)
+ * 
+ * @desc 
+ * 1. 从栈顶添加、移除元素
+ * 2. 遵守后进先出(LIFO)的原则
+ */
 
 // 创建一个简单的栈类（基于数组）
 class Stack {
@@ -107,12 +113,12 @@ class ObjStack {
   }
 }
 
-/**
- * @demo 十进制转换多进制（0-Z满足 2~36进制）
- * @desc 余数依次入栈 依次出栈组成进制数
- * @params number 转换的数值
- * @params base 转换的进制
- */
+ /**
+  * @demo 十进制转换多进制（0-Z满足 2~36进制）
+  * @desc 余数依次入栈 依次出栈组成进制数
+  * @param {number} number 
+  * @param {string} base 
+  */
 
 function binaryConversion (number, base) {
   const remStack = new ObjStack()
