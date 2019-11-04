@@ -88,7 +88,7 @@ export class LinkedList {
    * @return {boolean}
    */
   insert (element, index) {
-    if (index < 0 || index >= this.count) {
+    if (index < 0 || index > this.count) {
       return false
     }
     let node = new Node(element)
