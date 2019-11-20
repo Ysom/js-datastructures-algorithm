@@ -6,7 +6,7 @@
  * 3. 查找每一个元素，都需要从表头开始迭代链表查找
  */
 
-import { defaultEquals } from './utils/utils.js'
+import { defaultEquals } from '../utils/utils.js'
 import { Node } from './models/model.js'
 
 // 创建一个链表类

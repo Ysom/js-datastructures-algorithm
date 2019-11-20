@@ -5,20 +5,9 @@
  * 2. 继承LinkedList类，重写insert方法
  */
 
-import { defaultEquals } from './utils/utils'
+import { defaultEquals } from '../utils/utils'
+import { defaultCompare } from '../utils/utils' 
 import { LinkedList } from './linked-list'
-
-const Compare = {
-  LESS_THAN: -1,
-  BIGGER_THAN: 1
-}
-
-function defaultCompare(a, b) {
-  if (a === b) {
-    return 0
-  }
-  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
-}
 
 // 创建一个有序链表类
 class SortedLinkedList extends LinkedList {

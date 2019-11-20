@@ -5,7 +5,7 @@
  * 2. 继承链表类，改造了push、insert、removeAt方法
  */
 
-import { defaultEquals } from './utils/utils'
+import { defaultEquals } from '../utils/utils'
 import { Node } from './models/model'
 import { LinkedList } from './linked-list'
 
