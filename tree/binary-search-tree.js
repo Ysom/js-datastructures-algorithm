@@ -6,7 +6,16 @@
  */
 
 import { Node } from './models/model' 
-import { defaultCompare } from '../utils/utils'
+import { Compare, defaultCompare } from '../utils/utils'
+
+
+
+let keyList = []
+
+function printKey (key) {
+  // console.log(key)
+  keyList.push(key)
+}
 
 // 创建一个二叉树类
 class BinarySearchTree {
@@ -52,4 +61,92 @@ class BinarySearchTree {
       }
     }
   }
+
+  /**
+   * @method 中序遍历-辅助方法
+   * @param {function} callback 
+   */
+  inOrderTraverse (callback) {
+    keyList = []
+    this.inOrderTraverseNode(this.root, callback)
+  }
+
+  /**
+   * @method 中序遍历-具体方法
+   * @param {Node} node 
+   * @param {function} callback 
+   */
+  inOrderTraverseNode (node, callback) {
+    if (node) {
+      this.inOrderTraverseNode(node.left, callback)
+      callback(node.key)
+      this.inOrderTraverseNode(node.right, callback)
+    }
+  }
+
+  /**
+   * @method 先序遍历-辅助方法
+   * @param {function} callback 
+   */
+  preOrderTraverse (callback) {
+    keyList = []
+    this.preOrderTraverseNode(this.root, callback)
+  }
+
+  /**
+   * @method 先序遍历-具体方法
+   * @param {Node} node 
+   * @param {function} callback 
+   */
+  preOrderTraverseNode (node, callback) {
+    if (node) {
+      callback(node.key)
+      this.preOrderTraverseNode(node.left, callback)
+      this.preOrderTraverseNode(node.right, callback)
+    }
+  }
+
+  /**
+   * @method 后序遍历-辅助方法
+   * @param {function} callback 
+   */
+  afterOrderTraverse (callback) {
+    keyList = []
+    this.afterOrderTraverseNode (this.root, callback)
+  }
+
+  /**
+   * @method 后序遍历-具体方法
+   * @param {Node} node 
+   * @param {function} callback 
+   */
+  afterOrderTraverseNode (node, callback) {
+    if (node) {
+      this.afterOrderTraverseNode(node.left, callback)
+      this.afterOrderTraverseNode(node.right, callback)
+      callback(node.key)
+    }
+  }
 }
+
+let tree = new BinarySearchTree()
+
+tree.insert(10)
+tree.insert(1)
+tree.insert(6)
+tree.insert(12)
+tree.insert(11)
+tree.insert(13)
+
+// 中序、先序、后序是表明父节点在遍历时的顺序
+// 中序
+tree.inOrderTraverse(printKey)
+console.log(`中序遍历：${keyList.join(',')}`)
+
+// 先序
+tree.preOrderTraverse(printKey)
+console.log(`先序遍历：${keyList.join(',')}`)
+
+// 后序
+tree.afterOrderTraverse(printKey)
+console.log(`后序遍历：${keyList.join(',')}`)
