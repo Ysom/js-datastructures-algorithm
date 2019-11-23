@@ -5,10 +5,8 @@
  * 2. 二叉搜索树是二叉树中的一种，只允许在左侧插入比父节点小的值，在右侧插入比父节点大的值
  */
 
-import { Node } from './models/model' 
-import { Compare, defaultCompare } from '../utils/utils'
-
-
+// import { Node } from './models/model' 
+// import { Compare, defaultCompare } from '../utils/utils'
 
 let keyList = []
 
@@ -127,6 +125,56 @@ class BinarySearchTree {
       callback(node.key)
     }
   }
+
+  /**
+   * @method 获取最小值节点
+   * @param {Node} node 
+   */
+  getMin (node = this.root) {
+    let current = node
+    while (current != null && current.left != null) {
+      current = current.left
+    }
+    return current
+  }
+
+  /**
+   * @method 获取最大值节点
+   * @param {Node} node 
+   */
+  getMax (node = this.root) {
+    let current = node
+    while (current != null && current.right != null) {
+      current = current.right
+    }
+    return current
+  }
+
+  /**
+   * @method 查找节点-辅助方法
+   * @param {number} key 
+   */
+  search (key) {
+    return this.searchNode(this.root, key)
+  }
+
+  /**
+   * @method 查找节点-具体方法
+   * @param {Node} node 
+   * @param {number} key 
+   */
+  searchNode (node, key) {
+    if (node == null) {
+      return false
+    }
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      return this.searchKey(node.left, key)
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      return this.searchKey(node.right, key)
+    } else {
+      return true
+    }
+  }
 }
 
 let tree = new BinarySearchTree()
@@ -150,3 +198,9 @@ console.log(`先序遍历：${keyList.join(',')}`)
 // 后序
 tree.afterOrderTraverse(printKey)
 console.log(`后序遍历：${keyList.join(',')}`)
+
+console.log(`最小值：${tree.getMin().key}`)
+console.log(`最大值：${tree.getMax().key}`)
+
+console.log(`查找值7：${tree.search(7)}`)
+console.log(`查找值6：${tree.search(6)}`)
