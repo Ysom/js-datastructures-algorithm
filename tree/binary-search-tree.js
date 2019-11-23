@@ -5,8 +5,8 @@
  * 2. 二叉搜索树是二叉树中的一种，只允许在左侧插入比父节点小的值，在右侧插入比父节点大的值
  */
 
-// import { Node } from './models/model' 
-// import { Compare, defaultCompare } from '../utils/utils'
+import { Node } from './models/model' 
+import { Compare, defaultCompare } from '../utils/utils'
 
 let keyList = []
 
