@@ -168,11 +168,59 @@ class BinarySearchTree {
       return false
     }
     if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
-      return this.searchKey(node.left, key)
+      return this.searchNode(node.left, key)
     } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
-      return this.searchKey(node.right, key)
+      return this.searchNode(node.right, key)
     } else {
       return true
+    }
+  }
+
+  
+  /**
+   * @method 删除节点-辅助方法
+   * @param {number} key 
+   */
+  remove (key) {
+    this.root = this.removeNode(this.root, key)
+  }
+
+  /**
+   * @method 删除节点-具体方法
+   * @param {Node} node 
+   * @param {number} key 
+   */
+  removeNode (node, key) {
+    if (node == null) {
+      return null
+    }
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      node.left = this.removeNode(node.left, key)
+      return node
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      node.right = this.removeNode(node.right, key)
+      return node
+    } else {
+      // key 等于 node.key的情况
+
+      // 第一种 不存在子节点 节点直接设置为null 返回节点
+      if (node.left == null && node.right == null) {
+        node = null
+        return node
+      }
+      // 第二种 存在一个子节点 节点引用直接指向子节点 返回节点
+      if (node.left == null) {
+        node = node.right
+        return node
+      } else if (node.right == null) {
+        node = node.left
+        return node
+      }
+      // 第三种 同时存在左右节点 找出右侧子树最小节点 替换 删除最小节点引用
+      const aux = this.getMin(node.right)
+      node.key = aux.key
+      node.right = this.removeNode(node.right, aux.key)
+      return node
     }
   }
 }
@@ -185,6 +233,9 @@ tree.insert(6)
 tree.insert(12)
 tree.insert(11)
 tree.insert(13)
+
+tree.remove(11)
+tree.remove(13)
 
 // 中序、先序、后序是表明父节点在遍历时的顺序
 // 中序
@@ -202,5 +253,5 @@ console.log(`后序遍历：${keyList.join(',')}`)
 console.log(`最小值：${tree.getMin().key}`)
 console.log(`最大值：${tree.getMax().key}`)
 
-console.log(`查找值7：${tree.search(7)}`)
 console.log(`查找值6：${tree.search(6)}`)
+console.log(`查找值11：${tree.search(11)}`)
